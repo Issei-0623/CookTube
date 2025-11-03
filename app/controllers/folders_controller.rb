@@ -13,6 +13,9 @@ class FoldersController < ApplicationController
     end
   end
 
+  def update
+  end
+
   private
     def folder_params
       params.require(:folder).permit(:name)
