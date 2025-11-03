@@ -12,5 +12,7 @@ Rails.application.routes.draw do
   end
 
   resources :saved_videos, only: [:index, :create, :destroy]
+
+  resources :folders, only: [:index, :create, :destroy]
   
 end
