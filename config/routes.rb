@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get "folders/index"
+  get "folders/new"
   devise_for :users
   get "up" => "rails/health#show", as: :rails_health_check
 
@@ -10,4 +12,5 @@ Rails.application.routes.draw do
   end
 
   resources :saved_videos, only: [:index, :create, :destroy]
+  
 end
