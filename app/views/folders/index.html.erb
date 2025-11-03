@@ -1,2 +1,14 @@
-<h1>Folders#index</h1>
-<p>Find me in app/views/folders/index.html.erb</p>
+<h1>フォルダ一覧</h1>
+  <div class="folder_create">
+    <%= form_with model: @folder do |form| %>
+      <%= form.text_field :name %>
+      <%= form.submit "保存" %>
+    <% end %>
+  </div>
+
+  <div class="folder_render">
+    <% @folders.each do | folder | %>
+      <%= folder.name %>
+    <% end %>
+  </div>
+
