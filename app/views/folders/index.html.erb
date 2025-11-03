@@ -13,7 +13,7 @@
         <div class="folder-menu">
           <ul>
             <li>
-              <%= link_to "フォルダを編集", folder_path(folder), class: "update-btn" %>
+              <%= link_to "フォルダを編集", edit_folder_path(folder), class: "update-btn" %>
             </li>
             <li>
               <%= button_to "フォルダを削除", folder_path(folder), method: :delete, data: { turbo_confirm: "削除しますか？" }, class: "delete-btn" %>

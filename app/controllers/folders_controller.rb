@@ -13,8 +13,25 @@ class FoldersController < ApplicationController
     end
   end
 
-  def update
+  def edit
+    @folder = current_user.folders.find(params[:id])
   end
+
+  def update
+    @folder = current_user.folders.find(params[:id])
+    if @folder.update(folder_params)
+      redirect_to folders_path, notice: "更新しました"
+    else
+      render :edit, status: :unprocessable_entity  # 更新に失敗したとき、エラー付きの edit ページをもう一度見せる
+    end
+  end
+
+  def destroy
+    @folder = current_user.folders.find(params[:id])
+    @folder.destroy
+    redirect_to folders_path, notice: "削除しました"
+  end
+
 
   private
     def folder_params

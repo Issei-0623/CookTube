@@ -1,0 +1,14 @@
+<h1>フォルダ名を編集</h1>
+
+<%= form_with model: @folder do |f| %>
+  <% if @folder.errors.any? %>
+    <div class="error-messages">
+      <% @folder.errors.full_messages.each do |message| %>
+        <p><%= message %></p>
+      <% end %>
+    </div>
+  <% end %>
+
+  <%= f.text_field :name %>
+  <%= f.submit "更新" %>
+<% end %>
