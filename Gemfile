@@ -56,6 +56,7 @@ group :development, :test do
   gem "pry-rescue"
   gem "pry-stack_explorer"
   gem "rubocop-rails"
+  gem "nokogiri"
 
 
   # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
