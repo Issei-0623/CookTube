@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "searches/index"
   get "folders/index"
   get "folders/new"
   devise_for :users
@@ -12,7 +13,8 @@ Rails.application.routes.draw do
   end
 
   resources :saved_videos, only: [:index, :create, :destroy, :update]
-
   resources :folders, only: [:index, :create, :edit, :update, :destroy, :show]
+  resources :searches, only: [:index]
+
   
 end
