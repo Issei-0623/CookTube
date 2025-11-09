@@ -11,8 +11,8 @@ Rails.application.routes.draw do
     delete :avatar_destroy, on: :collection
   end
 
-  resources :saved_videos, only: [:index, :create, :destroy]
+  resources :saved_videos, only: [:index, :create, :destroy, :update]
 
-  resources :folders, only: [:index, :create, :edit, :update, :destroy]
+  resources :folders, only: [:index, :create, :edit, :update, :destroy, :show]
   
 end

@@ -32,6 +32,11 @@ class FoldersController < ApplicationController
     redirect_to folders_path, notice: "削除しました"
   end
 
+  def show
+    @folder = current_user.folders.find(params[:id])
+    @saved_videos = @folder.saved_videos
+  end
+
 
   private
     def folder_params
