@@ -1,0 +1,14 @@
+<h1><%= @folder.name %> フォルダの動画</h1>
+
+<% if @saved_videos.any? %>
+  <% @saved_videos.each do |video| %>
+    <%= video_tag video.url, controls: true, width: 320 %>
+  <% end %>
+<% else %>
+  <p>このフォルダには動画がありません。</p>
+<% end %>
+
+<div class="actions">
+  <%= link_to "フォルダ一覧", folders_index_path, class: "btn btn-tertiary" %>
+  <%= link_to "保存動画に戻る", saved_videos_path, class: "btn btn-secondary" %>
+</div>

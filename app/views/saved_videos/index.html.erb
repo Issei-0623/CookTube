@@ -1,9 +1,17 @@
 <h1>未分類動画</h1>
 <p>フォルダ分けしてください</p>
 
-<%= video_tag "videos/テスト動画1.mp4", controls: true, width: 320 %>
-<%= video_tag "videos/テスト動画2.mp4", controls: true, width: 320 %>
-<%= video_tag "videos/テスト動画3.mp4", controls: true, width: 320 %>
+<% @saved_videos.each do |video| %>
+  <div class="video-item">
+    <%= video_tag video.url, controls: true, width: 320 %>
+
+    <%= form_with url: saved_video_path(video), method: :patch do |f| %>
+      <%= f.label :folder_id, "フォルダを選択：" %>
+      <%= select_tag :folder_id, options_from_collection_for_select(@folders, :id, :name, video.folder_id), include_blank: "未分類" %>
+      <%= f.submit "移動" %>
+    <% end %>
+  </div>
+<% end %>
 
 <div class="actions">
   <%= link_to "フォルダ一覧", folders_index_path, class: "btn btn-tertiary" %>
