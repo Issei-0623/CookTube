@@ -3,6 +3,10 @@
 <% if @saved_videos.any? %>
   <% @saved_videos.each do |video| %>
     <%= video_tag video.url, controls: true, width: 320 %>
+    <%= button_to "削除", saved_video_path(video),
+          method: :delete,
+          form: { data: { turbo_confirm: "この動画を削除しますか？" } },
+          class: "btn btn-danger" %>
   <% end %>
 <% else %>
   <p>このフォルダには動画がありません。</p>
