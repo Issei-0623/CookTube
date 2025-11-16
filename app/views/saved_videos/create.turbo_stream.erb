@@ -1,0 +1,4 @@
+<%= turbo_stream.replace "flash" do %>
+  <% flash.now[:notice] = "動画を保存しました！" %>
+  <%= render "layouts/flash" %>
+<% end %>

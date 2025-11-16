@@ -13,11 +13,13 @@
     <p><%= video[:title] %></p>
     <%= video_tag video[:url], controls: true, width: 320 %>
 
-    <%= form_with model: SavedVideo.new, url: saved_videos_path, method: :post, data: { turbo: false } do |f| %>
+    <%= form_with model: SavedVideo.new, url: saved_videos_path, method: :post do |f| %>
       <%= f.hidden_field :title, value: video[:title] %>
       <%= f.hidden_field :url, value: video[:url] %>
       <%= f.submit "保存" %>
     <% end %>
   </div>
 <% end %>
-
+<div class="actions">
+  <%= link_to "マイページ", mypage_path, class: "btn btn-secondary" %>
+</div>
