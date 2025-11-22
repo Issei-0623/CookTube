@@ -1,25 +1,22 @@
 <h1>動画を探す</h1>
+
 <%= form_with url: searches_path, method: :get do |f| %>
   <%= f.text_field :keyword, placeholder: "検索ワードを入力" %>
   <%= f.submit "検索" %>
 <% end %>
 
-<% if @tiktok_url.present? %>
-  <p>生成されたURL: <%= @tiktok_url %></p>
-<% end %>
-
 <% @videos.each do |video| %>
   <div class="video-item">
     <p><%= video[:title] %></p>
-    <%= video_tag video[:url], controls: true, width: 320 %>
-
-    <%= form_with model: SavedVideo.new, url: saved_videos_path, method: :post do |f| %>
-      <%= f.hidden_field :title, value: video[:title] %>
-      <%= f.hidden_field :url, value: video[:url] %>
-      <%= f.submit "保存" %>
+    <% if video[:thumbnail].present? %>
+      <%= image_tag video[:thumbnail], width: 200 %>
+    <% end %>
+    <% if video[:url].present? %>
+      <%= video_tag video[:url], controls: true, width: 320 %>
     <% end %>
   </div>
 <% end %>
+
 <div class="actions">
   <%= link_to "マイページ", mypage_path, class: "btn btn-secondary" %>
 </div>

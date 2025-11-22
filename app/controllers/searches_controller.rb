@@ -1,13 +1,27 @@
+require 'net/http'
+require 'uri'
+require 'json'
+
 class SearchesController < ApplicationController
   def index
     if params[:keyword].present?
-      @tiktok_url = "https://www.tiktok.com/search?q=#{params[:keyword]}"
-    end
+      url = URI("https://tiktok-scraper-api4.p.rapidapi.com/api/v1/search/live?keyword=#{params[:keyword]}")
 
-    @videos = [
-      { title: "オムライスの作り方", url: "/videos/test_video1.mp4" },
-      { title: "親子丼のレシピ", url: "/videos/test_video2.mp4" },
-      { title: "カツ丼の作り方", url: "/videos/test_video3.mp4" }
-    ]
+      http = Net::HTTP.new(url.host, url.port)
+      http.use_ssl = true
+
+      request = Net::HTTP::Get.new(url)
+      request["x-rapidapi-key"] = ENV['RAPIDAPI_KEY']
+      request["x-rapidapi-host"] = ENV['RAPIDAPI_HOST']
+
+      response = http.request(request)
+      result = JSON.parse(response.body)
+
+      puts "API Response: #{result}"
+
+      @videos = result["data"] || []
+    else
+      @videos = []
+    end
   end
 end

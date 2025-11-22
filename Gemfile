@@ -57,7 +57,7 @@ group :development, :test do
   gem "pry-stack_explorer"
   gem "rubocop-rails"
   gem "nokogiri"
-
+  gem "dotenv-rails"
 
   # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
   gem "brakeman", require: false
