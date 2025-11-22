@@ -2,10 +2,56 @@ ja:
   activerecord:
     models:
       folder: フォルダ
+      user: ユーザー
     attributes:
       folder:
         name: フォルダ名
+      user:
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: パスワード（確認用）
+        nickname: ニックネーム
     errors:
       messages:
         blank: "を入力してください"
         taken: "はすでに存在します"
+
+  errors:
+    messages:
+      not_saved: "%{count}件のエラーにより%{resource}は保存されませんでした。"
+      current_password: "現在のパスワードを入力してください"
+
+  devise:
+    errors:
+      messages:
+        current_password: "現在のパスワードを入力してください"
+    sessions:
+      signed_in: "ログインしました。"
+      signed_out: "ログアウトしました。"
+      already_signed_out: "すでにログアウトしています。"
+    registrations:
+      signed_up: "アカウントを登録しました。"
+      updated: "アカウント情報を更新しました。"
+      destroyed: "アカウントを削除しました。"
+    passwords:
+      send_instructions: "パスワード再設定の案内メールを送信しました。"
+      updated: "パスワードを変更しました。"
+    confirmations:
+      send_instructions: "確認メールを送信しました。"
+      confirmed: "メールアドレスの確認が完了しました。"
+    failure:
+      already_authenticated: "すでにログインしています。"
+      unauthenticated: "続行するにはログインが必要です。"
+      invalid: "メールアドレスまたはパスワードが正しくありません。"
+      not_found_in_database: "メールアドレスまたはパスワードが正しくありません。"
+    shared:
+      minimum_password_length:
+        one: "（%{count}文字以上）"
+        other: "（%{count}文字以上）"
+    mailer:
+      confirmation_instructions:
+        subject: "アカウントの確認メール"
+      reset_password_instructions:
+        subject: "パスワード再設定のご案内"
+      unlock_instructions:
+        subject: "アカウントロック解除のご案内"

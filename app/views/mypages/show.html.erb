@@ -26,13 +26,20 @@
     <% end %>
     </div>
 
-  <h1><%= current_user.name %>さん、ようこそ！</h1>
+  <h1>
+    <% if current_user.nickname.present? %>
+        <%= current_user.nickname %> さん、ようこそ！
+    <% else %>
+        <%= current_user.email %> さん、ようこそ！
+    <% end %>
+  </h1>
   <p>CookTokへログイン中です。</p>
 
   <div class="actions">
-    <%= link_to "動画を探す", searches_path, class: "btn btn-primary" %>
-    <%= link_to "保存動画", saved_videos_path, class: "btn btn-tertiary" %>
-    <%= link_to "ログアウト", destroy_user_session_path, data: { turbo_method: :delete }, class: "btn btn-secondary" %>
+    <%= link_to "動画を探す", searches_path, class: "btn btn-search" %>
+    <%= link_to "保存動画", saved_videos_path, class: "btn btn-post" %>
+    <%= link_to "プロフィールを編集", edit_user_registration_path, class: "btn btn-profile" %>
+    <%= link_to "ログアウト", destroy_user_session_path, data: { turbo_method: :delete }, class: "btn btn-logout" %>
   </div>
 </div>
 
