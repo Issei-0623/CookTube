@@ -5,16 +5,34 @@
   <%= f.submit "検索" %>
 <% end %>
 
-<% @videos.each do |video| %>
-  <div class="video-item">
-    <p><%= video[:title] %></p>
-    <% if video[:thumbnail].present? %>
-      <%= image_tag video[:thumbnail], width: 200 %>
-    <% end %>
-    <% if video[:url].present? %>
-      <%= video_tag video[:url], controls: true, width: 320 %>
-    <% end %>
-  </div>
+<% if params[:keyword].present? %>
+  <h2>検索ワード: <%= params[:keyword] %></h2>
+<% end %>
+
+<% if @videos.present? %>
+  <% @videos.each do |video| %>
+    <% title = video["desc"] || video["title"] || "タイトルなし" %>
+    <% video_id = video["id"] %>
+
+    <div class="video-item" style="margin-bottom: 40px;">
+      <p>タイトル: <%= title %></p>
+
+      <% if video_id.present? %>
+        <!-- ✅ TikTok埋め込み -->
+        <iframe
+          src="https://www.tiktok.com/embed/v2/<%= video_id %>"
+          width="360"
+          height="640"
+          frameborder="0"
+          allowfullscreen>
+        </iframe>
+      <% else %>
+        <p>▶️ 埋め込みURLが見つかりません。</p>
+      <% end %>
+    </div>
+  <% end %>
+<% else %>
+  <p>動画が見つかりませんでした。</p>
 <% end %>
 
 <div class="actions">
