@@ -1,8 +1,22 @@
-<%# 導入メッセージ %>
-<h1>CookTokへようこそ</h1>
+<div class="homepage">
+  <header class="navbar">
+    <%= link_to 'ログイン', new_user_session_path, class: 'nav-link' %>
+    <%= link_to 'アカウント登録', new_user_registration_path, class: 'nav-link' %>
+  </header>
 
-<%# ログインボタンを作成する場合 %>
-<%= link_to 'ログイン', new_user_session_path %>
+  <h1 class="logo">CookTok</h1>
+  <p class="catchcopy">あなたの料理をシェアしよう</p>
 
-<%# 新規登録ボタンを作成する場合 %>
-<%= link_to 'アカウント登録はこちら', new_user_registration_path %>
+  <div class="food-illustrations">
+    <%= image_tag 'cook/ramen.png', class: 'food ramen' %>
+    <%= image_tag 'cook/pancakes.png', class: 'food pancake' %>
+    <%= image_tag 'cook/fried_egg.png', class: 'food fried_egg' %>
+    <%= image_tag 'cook/hamburger.png', class: 'food burger' %>
+    <%= image_tag 'cook/strawberry.png', class: 'food strawberry' %>
+    <%= image_tag 'cook/potato.png', class: 'food potato' %>
+    <%= image_tag 'cook/onigiri.png', class: 'food onigiri' %>
+    <%= image_tag 'cook/coffee.png', class: 'food coffee' %>
+    <%= image_tag 'cook/fish.png', class: 'food fish' %>
+    <%= image_tag 'cook/broccoli.png', class: 'food broccoli' %>
+  </div>
+</div>

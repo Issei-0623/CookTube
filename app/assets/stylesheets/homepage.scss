@@ -1,0 +1,94 @@
+body {
+  background: #fff3dc;
+  font-family: 'Zen Maru Gothic', 'Potta One', 'Noto Sans JP', sans-serif;
+  color: #5a4332;
+  overflow: hidden;
+  margin: 0;
+}
+
+.homepage {
+  position: relative;
+  min-height: 100vh;
+  text-align: center;
+
+  .navbar {
+    position: absolute;
+    top: 5%;
+    right: 10%;
+    display: flex;
+    gap: 24px;
+    z-index: 10;
+
+    .nav-link {
+      color: #5a4332;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 25px;
+      transition: opacity 0.2s;
+      &:hover { opacity: 0.7; }
+    }
+  }
+
+  .logo {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 160px;
+    font-weight: 900;
+    color: #e86d3b;
+    text-shadow: 4px 5px 0 #fff2d6;
+    letter-spacing: 4px;
+    line-height: 1.1;
+    z-index: 5;
+  }
+
+  .catchcopy {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 36px;
+    color: #6a4a3c;
+    letter-spacing: 2px;
+    z-index: 5;
+  }
+
+  .food-illustrations {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .food {
+    position: absolute;
+    width: 320px;
+    opacity: 0;
+    animation: fadeIn 1.5s ease forwards, float 7s ease-in-out infinite;
+  }
+
+  .ramen { top: 5%; left: 5%; animation-delay: 0.2s; }
+  .fried_egg { top: 8%; right: 20%; animation-delay: 0.4s; }
+  .pancake { top: 12%; right: 5%; animation-delay: 0.6s; }
+  .burger { bottom: 12%; left: 55%; animation-delay: 0.8s; }
+  .strawberry { bottom: 10%; left: 4%; animation-delay: 1s; }
+  .potato { bottom: 8%; right: 60%; animation-delay: 1.2s; }
+  .onigiri { top: 5%; left: 40%; animation-delay: 1.4s; }
+  .coffee { top: 60%; right: 2%; animation-delay: 1.6s; }
+  .fish { top: 25%; left: 15%; animation-delay: 1.8s; }
+  .broccoli { bottom: 30%; right: 15%; animation-delay: 2s; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px) scale(0.9); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+}
