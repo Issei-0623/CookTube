@@ -67,20 +67,26 @@ body {
   .food {
     position: absolute;
     width: 320px;
+    opacity: 1;
+    transition: opacity 1s ease-in-out;
+    animation: float 7s ease-in-out infinite;
+    }
+
+
+  .food.hidden {
     opacity: 0;
-    animation: fadeIn 1.5s ease forwards, float 7s ease-in-out infinite;
   }
 
-  .ramen { top: 5%; left: 5%; animation-delay: 0.2s; }
-  .fried_egg { top: 8%; right: 20%; animation-delay: 0.4s; }
-  .pancake { top: 12%; right: 5%; animation-delay: 0.6s; }
-  .burger { bottom: 12%; left: 55%; animation-delay: 0.8s; }
-  .strawberry { bottom: 10%; left: 4%; animation-delay: 1s; }
-  .potato { bottom: 8%; right: 60%; animation-delay: 1.2s; }
-  .onigiri { top: 5%; left: 40%; animation-delay: 1.4s; }
-  .coffee { top: 60%; right: 2%; animation-delay: 1.6s; }
-  .fish { top: 25%; left: 15%; animation-delay: 1.8s; }
-  .broccoli { bottom: 30%; right: 15%; animation-delay: 2s; }
+  .ramen { top: 5%; left: 5%}
+  .fried_egg { top: 8%; right: 20%}
+  .pancake { top: 12%; right: 5%}
+  .burger { bottom: 12%; left: 55%}
+  .strawberry { bottom: 10%; left: 4%}
+  .potato { bottom: 8%; right: 60%}
+  .onigiri { top: 5%; left: 40%}
+  .coffee { top: 60%; right: 2%}
+  .fish { top: 25%; left: 15% }
+  .broccoli { bottom: 30%; right: 15% }
 
   @keyframes fadeIn {
     from { opacity: 0; transform: translateY(20px) scale(0.9); }
