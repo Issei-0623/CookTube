@@ -1,19 +1,23 @@
-require 'net/http'
-require 'uri'
-require 'json'
-require 'open-uri'
-
 class SearchesController < ApplicationController
+  require 'net/http'
+  require 'uri'
+  require 'json'
+  require 'open-uri'
+
   def index
     if params[:keyword].present?
-      url = URI("https://tiktok-scraper-api4.p.rapidapi.com/api/v1/search/videos?keyword=#{URI.encode_www_form_component(params[:keyword])}")
+      page = (params[:page] || 1).to_i
+      limit = 11
+      cursor = (page - 1) * limit
+
+      url = URI("https://tiktok-scraper-api4.p.rapidapi.com/api/v1/search/videos?keyword=#{URI.encode_www_form_component(params[:keyword])}&cursor=#{cursor}&limit=#{limit}")
 
       http = Net::HTTP.new(url.host, url.port)
       http.use_ssl = true
 
       request = Net::HTTP::Get.new(url)
-      request["x-rapidapi-key"] = ENV['RAPIDAPI_KEY']
-      request["x-rapidapi-host"] = ENV['RAPIDAPI_HOST']
+      request["x-rapidapi-key"] = ENV["RAPIDAPI_KEY"]
+      request["x-rapidapi-host"] = ENV["RAPIDAPI_HOST"]
 
       response = http.request(request)
       result = JSON.parse(response.body)
@@ -21,6 +25,7 @@ class SearchesController < ApplicationController
       puts "API Response: #{result}"
 
       @videos = result["data"] || []
+      @next_page = page + 1 if @videos.any?
     else
       @videos = []
     end
@@ -32,14 +37,13 @@ class SearchesController < ApplicationController
 
     begin
       decoded_url = CGI.unescape(encoded_url)
-
       video_data = URI.open(decoded_url,
         "User-Agent" => "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
         "Referer" => "https://www.tiktok.com/",
         "Accept" => "*/*",
+        "Origin" => "https://www.tiktok.com/",
         "Accept-Language" => "en-US,en;q=0.9",
-        "Origin" => "https://www.tiktok.com",
-        ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE # ← SSL証明書チェックを無効化
+        ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE
       ).read
 
       send_data video_data, type: "video/mp4", disposition: "inline"
@@ -52,3 +56,4 @@ class SearchesController < ApplicationController
     end
   end
 end
+

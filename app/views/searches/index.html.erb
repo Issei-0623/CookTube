@@ -1,40 +1,47 @@
-<h1>動画を探す</h1>
+<body class="mypage">
+  <h1>動画を探す</h1>
 
-<%= form_with url: searches_path, method: :get do |f| %>
-  <%= f.text_field :keyword, placeholder: "検索ワードを入力" %>
-  <%= f.submit "検索" %>
-<% end %>
+  <%= form_with url: searches_path, method: :get do |f| %>
+    <%= f.text_field :keyword, placeholder: "検索ワードを入力" %>
+    <%= f.submit "検索" %>
+  <% end %>
 
-<% if params[:keyword].present? %>
-  <h2>検索ワード: <%= params[:keyword] %></h2>
-<% end %>
+  <% if params[:keyword].present? %>
+    <h2>検索ワード: <%= params[:keyword] %></h2>
+  <% end %>
 
-<% if @videos.present? %>
-  <% @videos.each do |video| %>
-    <% title = video["desc"] || video["title"] || "タイトルなし" %>
-    <% video_id = video["id"] %>
+  <% if @videos.present? %>
+    <% @videos.each do |video| %>
+      <% title = video["desc"] || video["title"] || "タイトルなし" %>
+      <% video_id = video["id"] %>
 
-    <div class="video-item" style="margin-bottom: 40px;">
-      <p>タイトル: <%= title %></p>
+      <div class="video-item" style="margin-bottom: 40px;">
+        <p>タイトル: <%= title %></p>
 
-      <% if video_id.present? %>
-        <!-- ✅ TikTok埋め込み -->
-        <iframe
-          src="https://www.tiktok.com/embed/v2/<%= video_id %>"
-          width="360"
-          height="640"
-          frameborder="0"
-          allowfullscreen>
-        </iframe>
-      <% else %>
-        <p>▶️ 埋め込みURLが見つかりません。</p>
-      <% end %>
+        <% if video_id.present? %>
+          <!-- ✅ TikTok埋め込み -->
+          <iframe
+            src="https://www.tiktok.com/embed/v2/<%= video_id %>"
+            width="360"
+            height="640"
+            frameborder="0"
+            allowfullscreen>
+          </iframe>
+        <% else %>
+          <p>▶️ 埋め込みURLが見つかりません。</p>
+        <% end %>
+      </div>
+    <% end %>
+  <% else %>
+    <p>動画が見つかりませんでした。</p>
+  <% end %>
+
+  <div class="actions">
+    <%= link_to "マイページ", mypage_path, class: "btn btn-mypage" %>
+  </div>
+  <% if @videos.present? && @videos.size >= 11 %>
+    <div class="pagination">
+      <%= link_to "もっと見る", searches_path(keyword: params[:keyword], page: @next_page), class: "btn btn-loadmore" %>
     </div>
   <% end %>
-<% else %>
-  <p>動画が見つかりませんでした。</p>
-<% end %>
-
-<div class="actions">
-  <%= link_to "マイページ", mypage_path, class: "btn btn-secondary" %>
-</div>
+</body>
