@@ -2,6 +2,17 @@
 <html>
   <head>
     <title><%= content_for(:title) || "Cooktok" %></title>
+    <meta name="image-base-path" content="<%= File.dirname(image_url('cook/beef_bowl.png')) + '/' %>">
+        <% foods = %w[
+      beef_bowl bread broccoli carrot coffee croissant donut fish fried_egg hamburger
+      juice onigiri onion pancakes pasta potato ramen roast__chicken steak sushi strawberry tomato
+    ] %>
+
+    <% foods.each do |food| %>
+      <meta name="food-<%= food %>" content="<%= image_url("cook/#{food}.png") %>">
+    <% end %>
+
+
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
@@ -10,15 +21,17 @@
 
     <%= yield :head %>
 
-    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
+    <%# Enable PWA manifest for installable apps (optional) %>
     <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
 
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
 
-    <%# Includes all stylesheet files in app/assets/stylesheets %>
-    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%# Stylesheets %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+
+    <%# JavaScript (Importmap構成) %>
     <%= javascript_importmap_tags %>
   </head>
 
@@ -26,6 +39,7 @@
     <div id="flash">
       <%= render "layouts/flash" %>
     </div>
+
     <%= yield %>
 
     <p class="notice"><%= notice %></p>
