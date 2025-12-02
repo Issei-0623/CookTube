@@ -92,28 +92,51 @@ body {
     50% { transform: translateY(-20px); }
   }
 
-  /* ===== レスポンシブ対応 ===== */
-  @media (max-width: 1024px) {
-    .food { width: 180px; }
-    .logo { font-size: 120px; top: 32%; }
-    .catchcopy { font-size: 28px; top: 50%; }
+/* ===== レスポンシブ対応 ===== */
+@media (max-width: 1024px) {
+  .food { width: 80px; }
+  .logo { font-size: 100px; top: 32%; }
+  .catchcopy { font-size: 25px; top: 50%; }
+  .food--top-left { top: 5%; left: 5%; }
+  .food--top-right { top: 5%; right: 5%; }
+  .food--bottom--left { bottom: 5%; left: 5%; }
+  .food--bottom--right { bottom: 5%; right: 5%; }
+  .food--top-center-left,
+  .food--top-center-right,
+  .food--bottom-center-left,
+  .food--bottom-center-right,
+  .food--left,
+  .food--right {
+    display: none;
+  }
+}
+
+
+/* === スマホ小サイズ（〜480px） === */
+@media (max-width: 480px) {
+  .food { width: 30px; opacity: 1; }
+
+  .logo { font-size: 60px; top: 35%; }
+  .catchcopy { font-size: 20px; top: 52%; }
+
+  .navbar {
+    top: 3%;
+    right: 5%;
+    .nav-link { font-size: 20px; }
   }
 
-  @media (max-width: 768px) {
-    .food { width: 120px; opacity: 0.95; }
-
-    .logo { font-size: 80px; top: 35%; }
-    .catchcopy { font-size: 20px; top: 52%; }
-
-    .navbar {
-      top: 4%; right: 6%;
-      .nav-link { font-size: 16px; }
-    }
+  /* スマホでは2枚に限定して配置 */
+  .food--bottom-right { bottom: 5%; right: 15%; }
+  .food--top-left { top: 5%; left: 15%; }
+  .food--bottom-left,
+  .food--top-right,
+  .food--top-center-left
+  .food--top-center-right,
+  .food--bottom-center-left,
+  .food--bottom-center-right,
+  .food--left,
+  .food--right {
+    display: none;
   }
-
-  @media (max-width: 480px) {
-    .food { width: 90px; }
-    .logo { font-size: 60px; top: 34%; }
-    .catchcopy { font-size: 16px; top: 50%; }
-  }
+}
 }
