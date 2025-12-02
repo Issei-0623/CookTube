@@ -11,43 +11,44 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const foodImages = document.querySelectorAll(".food");
 
-  // ✅ 各画像にランダムなアニメーションディレイを設定
+  //  初期サイズをランダムに設定
   foodImages.forEach(img => {
-    const randomDelay = Math.random() * 2; // 0〜2秒
+    const randomSize = Math.floor(Math.random() * 120) + 200;
+    img.style.width = `${randomSize}px`;
+
+    // アニメーションのディレイをランダムにして動きにゆらぎを出す
+    const randomDelay = (Math.random() * 2).toFixed(2);
     img.style.animationDelay = `${randomDelay}s`;
   });
 
-  // 画像をランダムにフェード切り替え
+  //  フェードイン/アウトでランダム入れ替え
   function replaceRandomFood() {
-    // ✅ 一度に変える画像の枚数をランダムに（1〜3枚）
-    const changeCount = Math.floor(Math.random() * 3) + 1;
+    const changeCount = Math.floor(Math.random() * 3) + 2;
 
     for (let i = 0; i < changeCount; i++) {
       const target = foodImages[Math.floor(Math.random() * foodImages.length)];
       const newFood = foods[Math.floor(Math.random() * foods.length)];
       const meta = document.querySelector(`meta[name='food-${newFood}']`);
-
-      if (!meta) {
-        console.warn(`⚠️ metaタグが見つかりません: ${newFood}`);
-        continue;
-      }
+      if (!meta) continue;
 
       const imageUrl = meta.content;
 
-      // フェードアウト
-      target.style.transition = "opacity 5s ease";
+      target.style.transition = "opacity 4s ease";
       target.style.opacity = 0;
 
-      // 5秒後にフェードイン
       setTimeout(() => {
         target.src = imageUrl;
-        target.style.transition = "opacity 5s ease";
+
+        // 差し替え時にもサイズをランダムで再設定
+        const newSize = Math.floor(Math.random() * 200) + 300;
+        target.style.width = `${newSize}px`;
+
+        target.style.transition = "opacity 4s ease";
         target.style.opacity = 1;
-      }, 5000);
+      }, 4000);
     }
   }
 
-
-  // 3秒ごとにランダム画像切り替え
-  setInterval(replaceRandomFood, 3000);
+  // 4秒ごとにランダムで入れ替え
+  setInterval(replaceRandomFood, 4000);
 });
