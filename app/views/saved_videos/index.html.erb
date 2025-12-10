@@ -3,8 +3,23 @@
 <% if @saved_videos.present? %>
     <p>フォルダ分けしてください</p>
     <% @saved_videos.each do |video| %>
-    <div class="video-item">
-        <%= video_tag video.url, controls: true, width: 320 %>
+        <div class="video-item" style="margin-bottom: 40px;">
+            <% if video.nickname.present? %>
+                <div style="margin-bottom:10px;">
+                    <strong><%= video.nickname %></strong><br>
+                    <% if video.username.present? %>
+                        @<%= video.username %>
+                    <% end %>
+                </div>
+            <% end %>
+            <p><%= video.title %></p>
+            <iframe
+            src="<%= video.url %>"
+            width="360"
+            height="640"
+            frameborder="0"
+            allowfullscreen>
+            </iframe>
 
         <%= form_with url: saved_video_path(video), method: :patch do |f| %>
         <%= f.label :folder_id, "フォルダを選択：" %>

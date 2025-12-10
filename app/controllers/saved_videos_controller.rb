@@ -37,6 +37,6 @@ class SavedVideosController < ApplicationController
   private
 
   def saved_video_params
-    params.require(:saved_video).permit(:title, :url)
+    params.require(:saved_video).permit(:title, :url, :nickname, :username)
   end
 end
