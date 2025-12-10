@@ -16,10 +16,26 @@
       <% video_id = video["id"] %>
 
       <div class="video-item" style="margin-bottom: 40px;">
+
+      <!-- Creator 情報追加 -->
+      <% creator = video["author"] rescue nil %>
+      <% if creator.present? %>
+        <% avatar = creator["avatar_larger"] || creator["avatar_medium"] || creator["avatar_thumb"] || creator["avatar"] %>
+        <% nickname = creator["nickname"] rescue nil %>
+        <% username = creator["unique_id"] rescue nil %>
+
+            <div>
+              <strong><%= nickname %></strong><br>
+              <% if username.present? %>
+                @<%= username %>
+              <% end %>
+            </div>
+        </div>
+      <% end %>
         <p>タイトル: <%= title %></p>
 
         <% if video_id.present? %>
-          <!-- ✅ TikTok埋め込み -->
+          <!-- TikTok埋め込み -->
           <iframe
             src="https://www.tiktok.com/embed/v2/<%= video_id %>"
             width="360"
@@ -27,6 +43,16 @@
             frameborder="0"
             allowfullscreen>
           </iframe>
+
+          <!-- 保存ボタン -->
+          <%= form_with model: SavedVideo.new, url: saved_videos_path, method: :post, data: { turbo: true } do |f| %>
+            <%= f.hidden_field :title, value: title %>
+            <%= f.hidden_field :url, value: "https://www.tiktok.com/embed/v2/#{video_id}" %>
+            <%= f.hidden_field :nickname, value: nickname %>
+            <%= f.hidden_field :username, value: username %>
+            <%= f.submit "保存", class: "btn btn-saved" %>
+          <% end %>
+
         <% else %>
           <p>▶️ 埋め込みURLが見つかりません。</p>
         <% end %>
