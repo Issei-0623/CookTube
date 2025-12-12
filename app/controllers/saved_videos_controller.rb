@@ -17,14 +17,10 @@ class SavedVideosController < ApplicationController
 
   def create
     @saved_video = current_user.saved_videos.new(saved_video_params)
-    respond_to do |format|
-      if @saved_video.save
-        format.turbo_stream
-        format.html { redirect_to saved_videos_path, notice: "動画を保存しました！" }
-      else
-        format.turbo_stream
-        format.html { redirect_to searches_path, alert: "保存に失敗しました。" }
-      end
+    if @saved_video.save
+      redirect_back fallback_location: searches_path, notice: "動画を保存しました！"
+    else
+      redirect_back fallback_location: searches_path, alert: "保存に失敗しました"
     end
   end
 

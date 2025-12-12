@@ -45,7 +45,7 @@
           </iframe>
 
           <!-- 保存ボタン -->
-          <%= form_with model: SavedVideo.new, url: saved_videos_path, method: :post, data: { turbo: true } do |f| %>
+          <%= form_with model: SavedVideo.new, url: saved_videos_path, method: :post, data: { turbo: false } do |f| %>
             <%= f.hidden_field :title, value: title %>
             <%= f.hidden_field :url, value: "https://www.tiktok.com/embed/v2/#{video_id}" %>
             <%= f.hidden_field :nickname, value: nickname %>
