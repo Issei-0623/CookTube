@@ -1,8 +1,14 @@
 <h1>フォルダ一覧</h1>
-  <div class="folder_create">
+  <!-- 追加ボタン -->
+  <div style="margin-bottom: 20px;">
+    <button id="show-folder-form" class="btn btn-primary">＋ 新しいフォルダを追加</button>
+  </div>
+
+  <!-- 隠れているフォルダ作成フォーム -->
+  <div id="folder-form" style="display: none; margin-bottom: 20px;">
     <%= form_with model: @folder do |form| %>
-      <%= form.text_field :name %>
-      <%= form.submit "保存" %>
+      <%= form.text_field :name, placeholder: "フォルダ名を入力" %>
+      <%= form.submit "保存", class: "btn btn-success" %>
     <% end %>
   </div>
 
