@@ -36,9 +36,13 @@
 
     <%# JavaScript (Importmap構成) %>
     <%= javascript_importmap_tags %>
+    <%= javascript_include_tag "background_foods_common", defer: true %>
+    <%= javascript_include_tag "homepage_foods", defer: true %>
+    <%= javascript_include_tag "mypage_foods", defer: true %>
+
   </head>
 
-  <body>
+  <body class="<%= controller.controller_name %> <%= controller.action_name %>">
     <div id="flash">
       <%= render "layouts/flash" %>
     </div>

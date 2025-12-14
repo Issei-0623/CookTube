@@ -18,6 +18,11 @@ body {
     line-height: 1.2;
     margin-bottom: 32px;
     letter-spacing: 2px;
+
+    .line1,
+    .line2 {
+      display: inline; // PC では横並び
+     }
   }
 
   p {
@@ -245,4 +250,15 @@ body {
       }
     }
   }
+
+  @media (max-width: 480px) {
+  h1{
+    font-size: 30px;
+  }
+
+  .line1, .line2 {
+    display: block;
+    white-space: nowrap; 
+  }
+}
 }

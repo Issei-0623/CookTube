@@ -1,4 +1,3 @@
-import "homepage_foods";
 import "@hotwired/turbo-rails"
 
 // フォルダフォームの開閉
