@@ -2,25 +2,31 @@
 
 <% if @saved_videos.any? %>
   <% @saved_videos.each do |video| %>
-  <div class="video-item" style="margin-bottom: 40px;">
-    <% if @video.nickname.present? %>
-      <strong><%= @video.nickname %></strong><br>
-      <% if @video.username.present? %>
-        @<%= @video.username %>
+    <div class="video-item" style="margin-bottom: 40px;">
+
+      <% if video.nickname.present? %>
+        <strong><%= video.nickname %></strong><br>
+        <% if video.username.present? %>
+          <%= video.username %>
+        <% end %>
       <% end %>
-    <% end %>
-    <p><%= video.title %></p>
-    <iframe
-      src="<%= video.url %>"
-      width="360"
-      height="640"
-      frameborder="0"
-      allowfullscreen>
-    </iframe>
-    <%= button_to "削除", saved_video_path(video),
-          method: :delete,
-          form: { data: { turbo_confirm: "この動画を削除しますか？" } },
-          class: "btn btn-danger" %>
+
+      <p><%= video.title %></p>
+
+      <iframe
+        src="<%= video.url %>"
+        width="360"
+        height="640"
+        frameborder="0"
+        allowfullscreen>
+      </iframe>
+
+      <%= button_to "削除",
+            saved_video_path(video),
+            method: :delete,
+            form: { data: { turbo_confirm: "この動画を削除しますか？" } },
+            class: "btn btn-danger" %>
+    </div>
   <% end %>
 <% else %>
   <p>このフォルダには動画がありません。</p>
