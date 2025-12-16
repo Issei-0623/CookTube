@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("turbo:load", () => {
   console.log("🏠 homepage_foods.js loaded");
 
   const images = document.querySelectorAll(".food");
