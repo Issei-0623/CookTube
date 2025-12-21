@@ -1,73 +1,93 @@
-<body class="mypage">
-  <h1>動画を探す</h1>
+<body class="mypage search-page-wrapper">
+  <div class="search-page">
+    <h1>動画を探す</h1>
 
-  <%= form_with url: searches_path, method: :get do |f| %>
-    <%= f.text_field :keyword, placeholder: "検索ワードを入力" %>
-    <%= f.submit "検索" %>
-  <% end %>
+    <%= form_with url: searches_path, method: :get do |f| %>
+      <%= f.text_field :keyword, placeholder: "検索ワードを入力" %>
+      <%= f.submit "検索" %>
+    <% end %>
 
-  <% if params[:keyword].present? %>
-    <h2>検索ワード: <%= params[:keyword] %></h2>
-  <% end %>
+    <% if params[:keyword].present? %>
+      <h2>検索ワード: <%= params[:keyword] %></h2>
+    <% end %>
 
-  <% if @videos.present? %>
-    <% @videos.each do |video| %>
-      <% title = video["desc"] || video["title"] || "タイトルなし" %>
-      <% video_id = video["id"] %>
+    <% if @videos.present? %>
+      <div class="video-grid">
+        <% @videos.each do |video| %>
+          <% title = video["desc"] || video["title"] || "タイトルなし" %>
+          <% video_id = video["id"] %>
 
-      <div class="video-item" style="margin-bottom: 40px;">
+          <div class="video-item">
 
-      <!-- Creator 情報追加 -->
-      <% creator = video["author"] rescue nil %>
-      <% if creator.present? %>
-        <% avatar = creator["avatar_larger"] || creator["avatar_medium"] || creator["avatar_thumb"] || creator["avatar"] %>
-        <% nickname = creator["nickname"] rescue nil %>
-        <% username = creator["unique_id"] rescue nil %>
+            <!-- =========================
+                 ヘッダー（投稿者 + タイトル）
+                 ========================= -->
+            <% creator = video["author"] rescue nil %>
+            <% nickname = creator&.dig("nickname") %>
+            <% username = creator&.dig("unique_id") %>
 
-            <div>
-              <strong><%= nickname %></strong><br>
-              <% if username.present? %>
-                @<%= username %>
+            <div class="video-card-header">
+              <% if nickname.present? %>
+                <div class="creator">
+                  <strong><%= nickname %></strong>
+                  <% if username.present? %>
+                    <span class="username">@<%= username %></span>
+                  <% end %>
+                </div>
               <% end %>
+
+              <!-- タイトル（2行省略） -->
+              <p class="video-title"><%= title %></p>
             </div>
-        </div>
-      <% end %>
-        <p>タイトル: <%= title %></p>
 
-        <% if video_id.present? %>
-          <!-- TikTok埋め込み -->
-          <iframe
-            src="https://www.tiktok.com/embed/v2/<%= video_id %>"
-            width="360"
-            height="640"
-            frameborder="0"
-            allowfullscreen>
-          </iframe>
+            <!-- =========================
+                 TikTok 埋め込み
+                 ========================= -->
+            <% if video_id.present? %>
+              <div class="video-frame">
+                <iframe
+                  src="https://www.tiktok.com/embed/v2/<%= video_id %>"
+                  allowfullscreen>
+                </iframe>
+              </div>
 
-          <!-- 保存ボタン -->
-          <%= form_with model: SavedVideo.new, url: saved_videos_path, method: :post, data: { turbo: false } do |f| %>
-            <%= f.hidden_field :title, value: title %>
-            <%= f.hidden_field :url, value: "https://www.tiktok.com/embed/v2/#{video_id}" %>
-            <%= f.hidden_field :nickname, value: nickname %>
-            <%= f.hidden_field :username, value: username %>
-            <%= f.submit "保存", class: "btn btn-saved" %>
-          <% end %>
+              <!-- =========================
+                   保存ボタン
+                   ========================= -->
+              <div class="video-footer">
+                <%= form_with model: SavedVideo.new,
+                              url: saved_videos_path,
+                              method: :post,
+                              data: { turbo: false } do |f| %>
+                  <%= f.hidden_field :title, value: title %>
+                  <%= f.hidden_field :url, value: "https://www.tiktok.com/embed/v2/#{video_id}" %>
+                  <%= f.hidden_field :nickname, value: nickname %>
+                  <%= f.hidden_field :username, value: username %>
+                  <%= f.submit "保存", class: "btn btn-saved-search" %>
+                <% end %>
+              </div>
 
-        <% else %>
-          <p>▶️ 埋め込みURLが見つかりません。</p>
+            <% else %>
+              <p>▶️ 埋め込みURLが見つかりません。</p>
+            <% end %>
+
+          </div>
         <% end %>
       </div>
+    <% else %>
+      <p>動画が見つかりませんでした。</p>
     <% end %>
-  <% else %>
-    <p>動画が見つかりませんでした。</p>
-  <% end %>
 
-  <div class="actions">
-    <%= link_to "マイページ", mypage_path, class: "btn btn-mypage" %>
-  </div>
-  <% if @videos.present? && @videos.size >= 11 %>
-    <div class="pagination">
-      <%= link_to "もっと見る", searches_path(keyword: params[:keyword], page: @next_page), class: "btn btn-loadmore" %>
+    <div class="actions">
+      <%= link_to "マイページ", mypage_path, class: "btn btn-mypage" %>
     </div>
-  <% end %>
+
+    <% if @videos.present? && @videos.size >= 11 %>
+      <div class="pagination">
+        <%= link_to "もっと見る",
+                    searches_path(keyword: params[:keyword], page: @next_page),
+                    class: "btn btn-loadmore" %>
+      </div>
+    <% end %>
+  </div>
 </body>
