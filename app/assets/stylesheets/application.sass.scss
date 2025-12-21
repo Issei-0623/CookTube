@@ -1,3 +1,7 @@
-@use 'mypages';
-@use 'homepage';
+/* ===== 共通（順番が重要:一番上） ===== */
 @import "shared_background";
+
+/* ===== ページ別 ===== */
+@import "homepage";
+@import "mypages";
+@import "searches";

@@ -1,0 +1,196 @@
+/* ===========================
+   検索ページ専用
+   =========================== */
+
+/* body に search-page-wrapper が付いている時だけ有効 */
+body.search-page-wrapper {
+  margin: 0;
+}
+
+/* mypage の中央寄せ制限を解除（検索ページのみ） */
+body.search-page-wrapper .mypage {
+  max-width: none;
+  margin: 0 auto;
+  padding: 60px 40px;
+  text-align: center;
+}
+
+/* 検索ページ全体 */
+.search-page {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* ===========================
+   検索フォーム
+   =========================== */
+
+.search-page form {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+  gap: 12px;
+}
+
+.search-page input[type="text"] {
+  width: 520px;
+  height: 56px;
+  font-size: 18px;
+  padding: 0 16px;
+  border: 1px solid #ccc;
+}
+
+.search-page input[type="submit"] {
+  height: 56px;
+  padding: 0 28px;
+  font-size: 16px;
+  background: #ff865e;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.search-page input[type="text"],
+.search-page input[type="submit"],
+.btn,
+.btn-saved-search {
+  border-radius: 8px;
+}
+
+
+/* ===========================
+   動画一覧（グリッド）
+   =========================== */
+
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(320px, 1fr));
+  gap: 56px;
+  margin-top: 40px;
+}
+
+/* ===========================
+   動画カード
+   =========================== */
+
+.video-item {
+  background: #fff;
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+
+  display: flex;
+  flex-direction: column;
+}
+
+/* ヘッダー */
+.video-card-header {
+  min-height: 96px; /* 高さ揃え */
+  margin-bottom: 12px;
+}
+
+.creator {
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.creator .username {
+  margin-left: 6px;
+  color: #777;
+  font-size: 13px;
+}
+
+/* タイトル（2行省略） */
+.video-title {
+  font-size: 14px;
+  line-height: 1.5;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* iframe ラッパー */
+.video-frame {
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  margin-bottom: 12px;
+}
+
+.video-frame iframe {
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+}
+
+/* フッター（保存ボタン） */
+.video-footer {
+  margin-top: auto;
+  text-align: center;
+}
+
+.btn-saved-search {
+  background: #ff865e;
+  color: #fff;
+  border-radius: 20px;
+  padding: 8px 20px;
+  font-size: 14px;
+  border: none;
+  transition: background 0.2s ease;
+  cursor: pointer;
+}
+
+.btn.btn-saved-search:hover {
+  background: #ff704a;
+}
+
+/* ===========================
+   動画カード hover 演出（追加）
+   =========================== */
+
+.video-item {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.video-item:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.15);
+}
+
+/* ===========================
+   検索ボタン hover
+   =========================== */
+
+.search-page input[type="submit"] {
+  background: #ff865e;
+  transition: background 0.2s ease;
+}
+
+.search-page input[type="submit"]:hover {
+  background: #ff704a; /* 少し濃く */
+}
+
+/* ===========================
+   スマホ対応
+   =========================== */
+
+@media (max-width: 768px) {
+  body.search-page-wrapper .mypage {
+    padding: 40px 16px;
+  }
+
+  .search-page input[type="text"] {
+    width: 100%;
+    max-width: 260px;
+    font-size: 16px;
+  }
+
+  .search-page input[type="submit"] {
+    font-size: 14px;
+  }
+
+  .video-grid {
+    grid-template-columns: 1fr;
+  }
+}
