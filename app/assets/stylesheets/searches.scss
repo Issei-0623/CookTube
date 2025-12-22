@@ -135,6 +135,7 @@ body.search-page-wrapper .mypage {
   color: #fff;
   border-radius: 20px;
   padding: 8px 20px;
+  margin-top: 20px;
   font-size: 14px;
   border: none;
   transition: background 0.2s ease;
@@ -144,6 +145,30 @@ body.search-page-wrapper .mypage {
 .btn.btn-saved-search:hover {
   background: #ff704a;
 }
+
+/* マイページボタン（検索ページ用） */
+.actions.center {
+  margin: 40px 0 20px;
+  text-align: center;
+}
+
+.btn-mypage-main {
+  display: inline-block;
+  background:  #70c17b; /* マイページの緑 */
+  color: #fff;
+  padding: 12px 32px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.btn-mypage-main:hover {
+  background: #43a047;
+  transform: translateY(-2px);
+}
+
 
 /* ===========================
    動画カード hover 演出（追加）
@@ -169,6 +194,51 @@ body.search-page-wrapper .mypage {
 
 .search-page input[type="submit"]:hover {
   background: #ff704a; /* 少し濃く */
+}
+
+/* ===========================
+   検索ヒット数表示
+   =========================== */
+
+.search-count {
+  margin-top: 8px;
+  margin-bottom: 24px;
+  font-size: 14px;
+  color: #666;
+}
+
+/* ===========================
+   Google風ページネーション
+   =========================== */
+
+.google-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin: 48px 0;
+}
+
+.page-number,
+.page-nav {
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #ff865e;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.page-number:hover,
+.page-nav:hover {
+  background: #ffe1d6;
+}
+
+.page-number.active {
+  background: #ff865e;
+  color: #fff;
+  font-weight: bold;
+  cursor: default;
 }
 
 /* ===========================

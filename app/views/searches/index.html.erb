@@ -9,6 +9,9 @@
 
     <% if params[:keyword].present? %>
       <h2>検索ワード: <%= params[:keyword] %></h2>
+      <p class="search-count">
+        <%= (params[:page] || 1) %>ページ目を表示中（<%= @videos.size %>件）
+      </p>
     <% end %>
 
     <% if @videos.present? %>
@@ -78,16 +81,36 @@
       <p>動画が見つかりませんでした。</p>
     <% end %>
 
-    <div class="actions">
-      <%= link_to "マイページ", mypage_path, class: "btn btn-mypage" %>
-    </div>
+    <% if @videos.present? %>
+      <% current_page = (params[:page] || 1).to_i %>
 
-    <% if @videos.present? && @videos.size >= 11 %>
-      <div class="pagination">
-        <%= link_to "もっと見る",
-                    searches_path(keyword: params[:keyword], page: @next_page),
-                    class: "btn btn-loadmore" %>
+      <div class="pagination google-pagination">
+        <% if current_page > 1 %>
+          <%= link_to "＜",
+              searches_path(keyword: params[:keyword], page: current_page - 1),
+              class: "page-nav" %>
+        <% end %>
+        <% start_page = [current_page - 3, 1].max %>
+        <% end_page   = current_page + 3 %>
+
+        <% (start_page..end_page).each do |p| %>
+          <% if p == current_page %>
+            <span class="page-number active"><%= p %></span>
+          <% else %>
+            <%= link_to p,
+                searches_path(keyword: params[:keyword], page: p),
+                class: "page-number" %>
+          <% end %>
+        <% end %>
+        <%= link_to "＞",
+            searches_path(keyword: params[:keyword], page: current_page + 1),
+            class: "page-nav" %>
       </div>
     <% end %>
+
+
+    <div class="actions center">
+      <%= link_to "マイページ", mypage_path, class: "btn btn-mypage-main" %>
+    </div>
   </div>
 </body>
