@@ -25,6 +25,7 @@ class SearchesController < ApplicationController
       puts "API Response: #{result}"
 
       @videos = result["data"] || []
+      @saved_urls = SavedVideo.pluck(:url)
       @next_page = page + 1 if @videos.any?
     else
       @videos = []

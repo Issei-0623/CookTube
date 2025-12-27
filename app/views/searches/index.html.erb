@@ -45,7 +45,7 @@
 
             <!-- =========================
                  TikTok 埋め込み
-                 ========================= -->
+             ========================= -->
             <% if video_id.present? %>
               <div class="video-frame">
                 <iframe
@@ -56,17 +56,27 @@
 
               <!-- =========================
                    保存ボタン
-                   ========================= -->
+              ========================= -->
+              <% video_url = "https://www.tiktok.com/embed/v2/#{video_id}" %>
+
               <div class="video-footer">
-                <%= form_with model: SavedVideo.new,
-                              url: saved_videos_path,
-                              method: :post,
-                              data: { turbo: false } do |f| %>
-                  <%= f.hidden_field :title, value: title %>
-                  <%= f.hidden_field :url, value: "https://www.tiktok.com/embed/v2/#{video_id}" %>
-                  <%= f.hidden_field :nickname, value: nickname %>
-                  <%= f.hidden_field :username, value: username %>
-                  <%= f.submit "保存", class: "btn btn-saved-search" %>
+                <% if @saved_urls.include?(video_url) %>
+                  <!-- 保存済み -->
+                  <button class="btn btn-saved-search saved" disabled>
+                    保存済み
+                  </button>
+                <% else %>
+                  <!-- 未保存 -->
+                  <%= form_with model: SavedVideo.new,
+                                url: saved_videos_path,
+                                method: :post,
+                                data: { turbo: false } do |f| %>
+                    <%= f.hidden_field :title, value: title %>
+                    <%= f.hidden_field :url, value: video_url %>
+                    <%= f.hidden_field :nickname, value: nickname %>
+                    <%= f.hidden_field :username, value: username %>
+                    <%= f.submit "保存", class: "btn btn-saved-search" %>
+                  <% end %>
                 <% end %>
               </div>
 

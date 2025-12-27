@@ -146,6 +146,18 @@ body.search-page-wrapper .mypage {
   background: #ff704a;
 }
 
+/* 保存済み状態 */
+.btn-saved-search.saved {
+  background: #ccc;
+  color: #666;
+  cursor: default;
+  box-shadow: none;
+}
+
+.btn-saved-search.saved:hover {
+  background: #ccc; /* hover無効 */
+}
+
 /* マイページボタン（検索ページ用） */
 .actions.center {
   margin: 40px 0 20px;
