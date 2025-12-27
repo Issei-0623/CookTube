@@ -19,72 +19,34 @@
         <% @videos.each do |video| %>
           <% title = video["desc"] || video["title"] || "タイトルなし" %>
           <% video_id = video["id"] %>
+          <% creator = video["author"] rescue nil %>
+          <% nickname = creator&.dig("nickname") %>
+          <% username = creator&.dig("unique_id") %>
+          <% video_url = "https://www.tiktok.com/embed/v2/#{video_id}" %>
 
-          <div class="video-item">
+          <% video_card = SavedVideo.new(
+              title: title,
+              url: video_url,
+              nickname: nickname,
+              username: username
+          ) %>
 
-            <!-- =========================
-                 ヘッダー（投稿者 + タイトル）
-                 ========================= -->
-            <% creator = video["author"] rescue nil %>
-            <% nickname = creator&.dig("nickname") %>
-            <% username = creator&.dig("unique_id") %>
-
-            <div class="video-card-header">
-              <% if nickname.present? %>
-                <div class="creator">
-                  <strong><%= nickname %></strong>
-                  <% if username.present? %>
-                    <span class="username">@<%= username %></span>
-                  <% end %>
-                </div>
-              <% end %>
-
-              <!-- タイトル（2行省略） -->
-              <p class="video-title"><%= title %></p>
-            </div>
-
-            <!-- =========================
-                 TikTok 埋め込み
-             ========================= -->
-            <% if video_id.present? %>
-              <div class="video-frame">
-                <iframe
-                  src="https://www.tiktok.com/embed/v2/<%= video_id %>"
-                  allowfullscreen>
-                </iframe>
-              </div>
-
-              <!-- =========================
-                   保存ボタン
-              ========================= -->
-              <% video_url = "https://www.tiktok.com/embed/v2/#{video_id}" %>
-
-              <div class="video-footer">
-                <% if @saved_urls.include?(video_url) %>
-                  <!-- 保存済み -->
-                  <button class="btn btn-saved-search saved" disabled>
-                    保存済み
-                  </button>
-                <% else %>
-                  <!-- 未保存 -->
-                  <%= form_with model: SavedVideo.new,
-                                url: saved_videos_path,
-                                method: :post,
-                                data: { turbo: false } do |f| %>
-                    <%= f.hidden_field :title, value: title %>
-                    <%= f.hidden_field :url, value: video_url %>
-                    <%= f.hidden_field :nickname, value: nickname %>
-                    <%= f.hidden_field :username, value: username %>
-                    <%= f.submit "保存", class: "btn btn-saved-search" %>
-                  <% end %>
-                <% end %>
-              </div>
-
+          <%= render "shared/video_card", video: video_card do %>
+            <% if @saved_urls.include?(video_url) %>
+              <button class="btn btn-saved-search saved" disabled>保存済み</button>
             <% else %>
-              <p>▶️ 埋め込みURLが見つかりません。</p>
+              <%= form_with model: SavedVideo.new,
+                            url: saved_videos_path,
+                            method: :post,
+                            data: { turbo: false } do |f| %>
+                <%= f.hidden_field :title, value: title %>
+                <%= f.hidden_field :url, value: video_url %>
+                <%= f.hidden_field :nickname, value: nickname %>
+                <%= f.hidden_field :username, value: username %>
+                <%= f.submit "保存", class: "btn btn-saved-search" %>
+              <% end %>
             <% end %>
-
-          </div>
+          <% end %>
         <% end %>
       </div>
     <% else %>
