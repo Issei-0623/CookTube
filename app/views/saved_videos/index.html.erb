@@ -10,9 +10,17 @@
           <%= render "shared/video_card", video: video do %>
 
             <%= form_with url: saved_video_path(video), method: :patch do |f| %>
-              <%= select_tag :folder_id,
-                options_from_collection_for_select(@folders, :id, :name, video.folder_id),
-                include_blank: "未分類" %>
+              <% selected_folder_id =
+                video.video_folders.find { |vf| vf.folder_id.present? }&.folder_id %>
+
+            <%= select_tag :folder_id,
+            options_from_collection_for_select(
+                @folders,
+                :id,
+                :name,
+                selected_folder_id
+            ),
+            include_blank: "未分類"%>
               <%= f.submit "移動", class: "btn btn-saved-search" %>
             <% end %>
 

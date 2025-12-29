@@ -32,13 +32,18 @@
           ) %>
 
           <%= render "shared/video_card", video: video_card do %>
-            <% if @saved_urls.include?(video_url) %>
-              <button class="btn btn-saved-search saved" disabled>保存済み</button>
+
+            <% if (saved = current_user.saved_videos.find_by(url: video_url)) %>
+              <%= button_to "保存解除",
+                    saved_video_path(saved),
+                    method: :delete,
+                    data: { turbo: false },
+                    class: "btn btn-unsave-search" %>
             <% else %>
               <%= form_with model: SavedVideo.new,
-                            url: saved_videos_path,
-                            method: :post,
-                            data: { turbo: false } do |f| %>
+                    url: saved_videos_path,
+                    method: :post,
+                    data: { turbo: false } do |f| %>
                 <%= f.hidden_field :title, value: title %>
                 <%= f.hidden_field :url, value: video_url %>
                 <%= f.hidden_field :nickname, value: nickname %>

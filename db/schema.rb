@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_12_10_210719) do
+ActiveRecord::Schema[8.0].define(version: 2025_12_29_012530) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -53,10 +53,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_10_210719) do
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "folder_id"
     t.string "nickname"
     t.string "username"
-    t.index ["folder_id"], name: "index_saved_videos_on_folder_id"
     t.index ["user_id"], name: "index_saved_videos_on_user_id"
   end
 
@@ -74,9 +72,19 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_10_210719) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "video_folders", force: :cascade do |t|
+    t.integer "saved_video_id", null: false
+    t.integer "folder_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["folder_id"], name: "index_video_folders_on_folder_id"
+    t.index ["saved_video_id"], name: "index_video_folders_on_saved_video_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "folders", "users"
-  add_foreign_key "saved_videos", "folders"
   add_foreign_key "saved_videos", "users"
+  add_foreign_key "video_folders", "folders"
+  add_foreign_key "video_folders", "saved_videos"
 end
