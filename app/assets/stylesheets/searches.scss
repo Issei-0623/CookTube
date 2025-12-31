@@ -281,6 +281,23 @@ body.search-page-wrapper .mypage {
   font-size: 14px;
 }
 
+.video-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.video-tag {
+  background: #eee;
+  color: #333;
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  white-space: nowrap;
+}
+
+
 /* ===========================
    スマホ対応
    =========================== */

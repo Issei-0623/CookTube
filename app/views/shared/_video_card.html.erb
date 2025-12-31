@@ -1,5 +1,10 @@
 <div id="<%= dom_id(video) %>">
   <div class="video-item">
+    <div class="video-tags">
+    <% video.folders.each do |folder| %>
+        <span class="video-tag"><%= folder.name %></span>
+    <% end %>
+    </div>
     <div class="video-card-header">
         <% if video.nickname.present? %>
         <div class="creator">
