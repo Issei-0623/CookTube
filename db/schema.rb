@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_12_29_012530) do
+ActiveRecord::Schema[8.0].define(version: 2025_12_31_081053) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -55,6 +55,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_29_012530) do
     t.datetime "updated_at", null: false
     t.string "nickname"
     t.string "username"
+    t.boolean "needs_sorting"
     t.index ["user_id"], name: "index_saved_videos_on_user_id"
   end
 

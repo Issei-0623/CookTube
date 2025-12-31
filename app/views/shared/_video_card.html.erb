@@ -1,22 +1,24 @@
-<div class="video-item">
-  <div class="video-card-header">
-    <% if video.nickname.present? %>
-      <div class="creator">
-        <strong><%= video.nickname %></strong>
-        <% if video.username.present? %>
-          <span class="username">@<%= video.username %></span>
+<div id="<%= dom_id(video) %>">
+  <div class="video-item">
+    <div class="video-card-header">
+        <% if video.nickname.present? %>
+        <div class="creator">
+            <strong><%= video.nickname %></strong>
+            <% if video.username.present? %>
+            <span class="username">@<%= video.username %></span>
+            <% end %>
+        </div>
         <% end %>
-      </div>
-    <% end %>
 
-    <p class="video-title"><%= video.title %></p>
-  </div>
+        <p class="video-title"><%= video.title %></p>
+    </div>
 
-  <div class="video-frame">
-    <iframe src="<%= video.url %>" allowfullscreen></iframe>
-  </div>
+    <div class="video-frame">
+        <iframe src="<%= video.url %>" allowfullscreen></iframe>
+    </div>
 
-  <div class="video-footer">
-    <%= yield if block_given? %>
+    <div class="video-footer">
+        <%= yield if block_given? %>
+    </div>
   </div>
 </div>

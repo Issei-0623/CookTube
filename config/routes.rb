@@ -18,4 +18,11 @@ Rails.application.routes.draw do
   resources :saved_videos, only: [:index, :create, :destroy, :update]
   resources :folders, only: [:index, :create, :edit, :update, :destroy, :show]
   resources :searches, only: [:index, :create]
+
+  resources :saved_videos do
+    member do
+      post :remove_from_folder
+    end
+  end
+
 end
