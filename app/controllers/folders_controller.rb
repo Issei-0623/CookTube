@@ -19,12 +19,17 @@ class FoldersController < ApplicationController
 
   def update
     @folder = current_user.folders.find(params[:id])
+    if params[:folder][:remove_image] == "1"
+      @folder.image.purge
+    end
+    
     if @folder.update(folder_params)
       redirect_to folders_path, notice: "更新しました"
     else
-      render :edit, status: :unprocessable_entity  # 更新に失敗したとき、エラー付きの edit ページをもう一度見せる
+      render :edit
     end
   end
+
 
   def destroy
     @folder = current_user.folders.find(params[:id])
@@ -40,6 +45,6 @@ class FoldersController < ApplicationController
 
   private
     def folder_params
-      params.require(:folder).permit(:name)
+      params.require(:folder).permit(:name, :image)
     end
 end

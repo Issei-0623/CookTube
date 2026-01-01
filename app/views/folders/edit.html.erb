@@ -1,14 +1,24 @@
-<h1>フォルダ名を編集</h1>
+<h2>フォルダ編集</h2>
 
 <%= form_with model: @folder do |f| %>
-  <% if @folder.errors.any? %>
-    <div class="error-messages">
-      <% @folder.errors.full_messages.each do |message| %>
-        <p><%= message %></p>
-      <% end %>
+  <div>
+    <%= f.label :name, "フォルダ名" %><br>
+    <%= f.text_field :name %>
+  </div>
+
+  <div style="margin-top: 12px;">
+    <%= f.label :image, "フォルダ画像" %><br>
+    <%= f.file_field :image, accept: "image/*" %>
+  </div>
+
+  <% if @folder.image.attached? %>
+    <div style="margin-top: 8px;">
+      <%= f.check_box :remove_image %>
+      <%= f.label :remove_image, "画像を削除する" %>
     </div>
   <% end %>
 
-  <%= f.text_field :name %>
-  <%= f.submit "更新" %>
+  <div style="margin-top: 16px;">
+    <%= f.submit "更新", class: "btn btn-primary" %>
+  </div>
 <% end %>
