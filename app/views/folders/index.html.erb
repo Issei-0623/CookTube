@@ -1,35 +1,53 @@
 <h1>フォルダ一覧</h1>
-  <!-- 追加ボタン -->
-  <div style="margin-bottom: 20px;">
-    <button id="show-folder-form" class="btn btn-primary">＋ 新しいフォルダを追加</button>
-  </div>
+  <div class="folder-grid">
 
-  <!-- 隠れているフォルダ作成フォーム -->
-  <div id="folder-form" style="display: none; margin-bottom: 20px;">
-    <%= form_with model: @folder do |form| %>
-      <%= form.text_field :name, placeholder: "フォルダ名を入力" %>
-      <%= form.submit "保存", class: "btn btn-success" %>
-    <% end %>
-  </div>
+    <!-- フォルダ追加カード -->
+    <div class="folder-card add-folder-card">
+      <button id="show-folder-form" class="add-folder-btn">
+        ＋ 新しいフォルダ
+      </button>
 
-  <div class="folder_render">
-    <% @folders.each do | folder | %>
-        <%= link_to folder.name, folder_path(folder), class: "folder-link" %>
+      <div id="folder-form" style="display: none;">
+        <%= form_with model: @folder do |form| %>
+          <%= form.text_field :name, placeholder: "フォルダ名を入力" %>
+          <%= form.submit "保存", class: "btn btn-success" %>
+        <% end %>
+      </div>
+    </div>
 
-        <div class="folder-menu">
-          <ul>
-            <li>
-              <%= link_to "フォルダを編集", edit_folder_path(folder), class: "update-btn" %>
-            </li>
-            <li>
-              <%= button_to "フォルダを削除", folder_path(folder), method: :delete, data: { turbo_confirm: "削除しますか？" }, class: "delete-btn" %>
-            </li>
-          </ul>
+    <!-- 既存フォルダ -->
+    <div class="folder-grid">
+      <% @folders.each do |folder| %>
+        <div class="folder-card">
+
+          <div class="folder-image">
+            <% if folder.image.attached? %>
+              <%= image_tag folder.image, alt: folder.name %>
+            <% else %>
+              <%= image_tag "default_avatar.png", alt: "avatar" %>
+            <% end %>
+          </div>
+
+          <div class="folder-body">
+            <%= link_to folder.name, folder_path(folder), class: "folder-title" %>
+
+            <div class="folder-actions">
+              <%= link_to "編集", edit_folder_path(folder) %>
+              <%= button_to "削除",
+                    folder_path(folder),
+                    method: :delete,
+                    data: { turbo_confirm: "削除しますか？" } %>
+            </div>
+          </div>
+
         </div>
-    <% end %>
+      <% end %>
+    </div>
   </div>
+
 
 <div class="actions">
   <%= link_to "未分類動画", saved_videos_path, class: "btn btn-tertiary" %>
   <%= link_to "マイページ", mypage_path, class: "btn btn-secondary" %>
 </div>
+
