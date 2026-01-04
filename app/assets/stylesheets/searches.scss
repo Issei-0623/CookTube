@@ -171,9 +171,10 @@ body.search-page-wrapper .mypage {
 
 .video-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(320px, 1fr));
+  grid-template-columns: repeat(3 ,1fr);
   gap: 56px;
   margin-top: 40px;
+  gap: 32px;
 }
 
 /* ===========================
@@ -185,8 +186,8 @@ body.search-page-wrapper .mypage {
   border-radius: 14px;
   padding: 20px;
   box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-
   display: flex;
+  margin: 0 20px;
   flex-direction: column;
 }
 
@@ -459,5 +460,14 @@ body.search-page-wrapper .mypage {
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  .video-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .video-item {
+    margin: 0 20px;
   }
 }
