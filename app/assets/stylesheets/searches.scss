@@ -286,7 +286,7 @@ body.search-page-wrapper .mypage {
   text-align: center;
 }
 
-.btn-mypage-main {
+.btn-mypage {
   display: inline-block;
   background:  #70c17b; /* マイページの緑 */
   color: #fff;
@@ -298,8 +298,78 @@ body.search-page-wrapper .mypage {
   transition: background 0.2s ease, transform 0.2s ease;
 }
 
-.btn-mypage-main:hover {
+.btn-mypage:hover {
   background: #43a047;
+  transform: translateY(-2px);
+}
+
+.btn-folder {
+  display: inline-block;
+  background: #ff865e;
+  color: #fff;
+  padding: 12px 32px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.btn-folder:hover {
+  background: #ff704a; /* 少し濃く */
+  transform: translateY(-2px);
+}
+
+.btn-saved-video {
+  display: inline-block;
+  background:  #808080;
+  color: #fff;
+  padding: 12px 32px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.btn-saved-video:hover {
+  background:  #616161; /* 少し濃く */
+  transform: translateY(-2px);
+}
+
+.btn-edit {
+  display: inline-block;
+  background:  #ffae00;
+  color: #000000;
+  padding: 6px 16px;
+  border-radius: 8px;
+  font-size: 15px;
+  height: 30px;
+  // font-weight: bold;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.btn-edit:hover {
+  background:  #de9800;
+  transform: translateY(-2px);
+}
+
+.btn-delete {
+  display: inline-block;
+  background:  #ff0000;
+  color: #fff;
+  padding: 6px 16px;
+  border-radius: 8px;
+  font-size: 15px;
+  height: 40px;
+  // font-weight: bold;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.btn-delete:hover {
+  background:  #c30000; /* 少し濃く */
   transform: translateY(-2px);
 }
 
