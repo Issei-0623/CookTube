@@ -44,3 +44,19 @@ document.addEventListener("turbo:load", () => {
     });
   }
 });
+
+// フラッシュメッセージの自動削除
+document.addEventListener("turbo:load", () => {
+  const flashes = document.querySelectorAll(".flash");
+
+  flashes.forEach(flash => {
+    setTimeout(() => {
+      flash.classList.add("fade-out");
+    }, 3000);
+
+    setTimeout(() => {
+      flash.remove();
+    }, 3500);
+  });
+});
+
