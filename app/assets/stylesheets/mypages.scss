@@ -5,6 +5,11 @@ body {
   overflow: auto;
 }
 
+.text-field {
+  z-index: 1;
+  position: relative;
+}
+
 .mypage {
   margin: 100px auto;
   padding: 80px 20px;

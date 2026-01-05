@@ -47,7 +47,7 @@ function replaceRandomFoods(images) {
       target.style.width = `${newSize}px`;
 
       target.style.transition = "opacity 4s ease";
-      target.style.opacity = 1;
+      target.style.opacity = 0.5;
     }, 4000);
   }
 }

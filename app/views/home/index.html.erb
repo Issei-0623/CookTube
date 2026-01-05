@@ -4,11 +4,13 @@
     <%= link_to 'アカウント登録', new_user_registration_path, class: 'nav-link' %>
   </header>
 
-  <h1 class="logo">CookTok</h1>
-  <p class="catch-copy">
-    <span class="line1">見つけたレシピ、</span>
-    <span class="line2">あなたの味に。</span>
-  </p>
+  <div class="text-field">
+    <h1 class="logo">CookTok</h1>
+    <p class="catch-copy">
+      <span class="line1">見つけたレシピ、</span>
+      <span class="line2">あなたの味に。</span>
+    </p>
+  </div>
 
   <!--  背景料理イラスト配置 -->
   <%= render "shared/background_foods" %>
