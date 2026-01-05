@@ -26,18 +26,19 @@
         <%= f.file_field :avatar, id: "user_avatar", class: "hidden-input" %>
     <% end %>
     </div>
-
-  <h1>
-    <% if current_user.nickname.present? %>
-        <span class="line1"><%= current_user.nickname %> さん</span>
-        <span class="line2">ようこそ！</span>
-    <% else %>
-        <span class="line1"><%= current_user.email %> さん</span>
-        <span class="line2">ようこそ！</span>
-    <% end %>
-  </h1>
-
-  <p>CookTokへログイン中です。</p>
+  
+  <div class="text-field">
+    <h1>
+        <% if current_user.nickname.present? %>
+            <span class="line1"><%= current_user.nickname %> さん</span>
+            <span class="line2">ようこそ！</span>
+        <% else %>
+            <span class="line1"><%= current_user.email %> さん</span>
+            <span class="line2">ようこそ！</span>
+        <% end %>
+    </h1>
+    <p>CookTokへログイン中です。</p>
+  </div>
 
   <div class="actions">
     <%= link_to "動画を探す", searches_path, class: "btn btn-search" %>
