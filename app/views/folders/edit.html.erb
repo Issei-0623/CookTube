@@ -1,24 +1,28 @@
-<h2>フォルダ編集</h2>
+<div class="auth-page">
+  <div class="auth-container">
+    <h2>フォルダ編集</h2>
 
-<%= form_with model: @folder do |f| %>
-  <div>
-    <%= f.label :name, "フォルダ名" %><br>
-    <%= f.text_field :name %>
+    <%= form_with model: @folder do |f| %>
+      <div>
+        <%= f.label :name, "フォルダ名" %><br>
+        <%= f.text_field :name %>
+      </div>
+
+      <div style="margin-top: 12px;">
+        <%= f.label :image, "フォルダ画像" %><br>
+        <%= f.file_field :image, accept: "image/*" %>
+      </div>
+
+      <% if @folder.image.attached? %>
+        <div style="margin-top: 8px;">
+          <%= f.check_box :remove_image %>
+          <%= f.label :remove_image, "画像を削除する" %>
+        </div>
+      <% end %>
+
+      <div style="margin-top: 16px;">
+        <%= f.submit "更新", class: "btn btn-primary" %>
+      </div>
+    <% end %>
   </div>
-
-  <div style="margin-top: 12px;">
-    <%= f.label :image, "フォルダ画像" %><br>
-    <%= f.file_field :image, accept: "image/*" %>
-  </div>
-
-  <% if @folder.image.attached? %>
-    <div style="margin-top: 8px;">
-      <%= f.check_box :remove_image %>
-      <%= f.label :remove_image, "画像を削除する" %>
-    </div>
-  <% end %>
-
-  <div style="margin-top: 16px;">
-    <%= f.submit "更新", class: "btn btn-primary" %>
-  </div>
-<% end %>
+</div>
