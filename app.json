@@ -1,0 +1,16 @@
+{
+  "name": "CookTok",
+  "description": "This is CookTok",
+  "keywords": [],
+  "website": "",
+  "repository": "https://github.com/Issei-0623/Cooktok",
+  "env": {},
+  "addons": [
+    "heroku-postgresql:hobby-dev"
+  ],
+  "buildpacks": [{
+    "url": "heroku/nodejs"
+  }, {
+    "url": "heroku/ruby"
+  }]
+}
