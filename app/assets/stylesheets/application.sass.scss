@@ -1,7 +1,15 @@
-/* ===== 共通（順番が重要:一番上） ===== */
-@import "shared_background";
+/* ===== 共通 ===== */
+@import "based/body";
+
+/* ===== 共通 ===== */
+@import "shared/background";
+@import "shared/flash";
+@import "shared/auth";
+@import "shared/video_card";
 
 /* ===== ページ別 ===== */
-@import "homepage";
-@import "mypages";
-@import "searches";
+@import "pages/homepage";
+@import "pages/mypages";
+@import "pages/searches";
+@import "pages/folders";
+@import "pages/saved_videos";

@@ -1,0 +1,105 @@
+.homepage {
+  position: relative;
+  min-height: 100vh;
+  text-align: center;
+
+  .avatar {
+    opacity: 0.3;
+  }
+
+  /* ===== ナビゲーション ===== */
+  .navbar {
+    position: absolute;
+    top: 5%;
+    right: 10%;
+    display: flex;
+    gap: 24px;
+    z-index: 10;
+
+    .nav-link {
+      color: #5a4332;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 25px;
+      transition: opacity 0.2s;
+      &:hover { opacity: 0.7; }
+    }
+  }
+
+  /* ===== ロゴとキャッチコピー ===== */
+  .logo {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 160px;
+    font-weight: 900;
+    color: #e86d3b;
+    text-shadow: 4px 5px 0 #fff2d6;
+    letter-spacing: 4px;
+    z-index: 5;
+  }
+
+  .catch-copy {
+    position: absolute;
+    top: 52%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 50px;
+    color: #6a4a3c;
+    letter-spacing: 2px;
+    z-index: 5;
+
+    .line1,
+    .line2 {
+      display: inline; // PC では横並び
+    }
+  }
+}
+
+/* ===== レスポンシブ対応 ===== */
+@media (max-width: 1024px) {
+  .logo { font-size: 100px; top: 32%; }
+  .catch-copy { font-size: 25px; top: 50%; }
+}
+
+@media (max-width: 480px) {
+  .homepage {
+    margin: 20px auto;
+    padding: 16px 12px;
+    max-width: 360px;
+    overflow: visible;
+
+    .avatar {
+      width: 450px !important;
+      height: auto !important;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .logo {
+      font-size: 70px;
+      top: 20%;
+      transform: translate(-50%, -50%);
+    }
+
+    .catch-copy {
+      top: 35%;
+      font-size: 25px;
+      transform: translateX(-50%);
+
+      .line1,
+      .line2 {
+        display: block;
+        white-space: nowrap;
+      }
+
+      .line1 {
+        margin-bottom: 4px;
+      }
+    }
+  }
+}
+

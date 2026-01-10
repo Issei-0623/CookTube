@@ -1,0 +1,110 @@
+/* ===========================
+   動画一覧（グリッド）
+   =========================== */
+
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(3 ,1fr);
+  gap: 56px;
+  margin-top: 40px;
+  gap: 32px;
+}
+
+/* ===========================
+   動画カード
+   =========================== */
+
+.video-item {
+  background: #fff;
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  display: flex;
+  margin: 0 20px;
+  flex-direction: column;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.video-item:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.15);
+}
+
+/* ヘッダー */
+.video-card-header {
+  min-height: 96px; /* 高さ揃え */
+  margin-bottom: 12px;
+}
+
+.creator {
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.creator .username {
+  margin-left: 6px;
+  color: #777;
+  font-size: 13px;
+}
+
+/* タイトル（2行省略） */
+.video-title {
+  font-size: 14px;
+  line-height: 1.5;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* iframe ラッパー */
+.video-frame {
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  margin-bottom: 12px;
+}
+
+.video-frame iframe {
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+}
+
+/* フッター（保存ボタン） */
+.video-footer {
+  margin-top: auto;
+  text-align: center;
+}
+
+/* ファルダ名タグ */
+.video-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.video-tag {
+  background: #eee;
+  color: #333;
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  white-space: nowrap;
+}
+
+/* ===========================
+   スマホ対応
+   =========================== */
+
+@media (max-width: 768px) {
+  .video-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .video-item {
+    margin: 0 20px;
+  }
+}
