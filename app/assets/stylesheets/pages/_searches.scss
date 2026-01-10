@@ -1,0 +1,283 @@
+/* body に search-page-wrapper が付いている時だけ有効 */
+body.search-page-wrapper {
+  margin: 0;
+}
+
+/* mypage の中央寄せ制限を解除（検索ページのみ） */
+body.search-page-wrapper .mypage {
+  max-width: none;
+  margin: 0 auto;
+  padding: 60px 40px;
+  text-align: center;
+}
+
+.search-page {
+  max-width: 1400px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.search-page form {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+  gap: 12px;
+}
+
+.search-page input[type="text"] {
+  width: 520px;
+  height: 56px;
+  font-size: 18px;
+  padding: 0 16px;
+  border: 1px solid #ccc;
+}
+
+.search-page input[type="submit"] {
+  height: 56px;
+  padding: 0 28px;
+  font-size: 16px;
+  background: #ff865e;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.search-page input[type="text"],
+.search-page input[type="submit"],
+.btn,
+.btn-saved-search {
+  border-radius: 8px;
+}
+
+.folder-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.folder-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  text-decoration: none;
+}
+
+.folder-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.folder-edit {
+  font-size: 13px;
+  color: #666;
+}
+
+/* 保存ボタン */
+.btn-saved-search {
+  background: #ff865e;
+  color: #fff;
+  border-radius: 20px;
+  padding: 8px 20px;
+  margin-top: 20px;
+  font-size: 14px;
+  border: none;
+  transition: background 0.2s ease;
+  cursor: pointer;
+}
+
+.btn.btn-saved-search:hover {
+  background: #ff704a;
+}
+
+/* 保存済み状態 */
+.btn-saved-search.saved {
+  background: #ccc;
+  color: #666;
+  cursor: default;
+  box-shadow: none;
+}
+
+.btn-saved-search.saved:hover {
+  background: #ccc; /* hover無効 */
+}
+
+.btn-unsave-search {
+  background: #f5f5f5;
+  color: #555;
+  border: 1px solid #ccc;
+  width: 100%;
+  padding: 12px 0;
+  font-size: 16px;
+  border-radius: 8px;
+}
+
+.btn-unsave-search:hover {
+  background: #e0e0e0;
+}
+
+/* マイページボタン（検索ページ用） */
+.actions.center {
+  margin: 40px 0 20px;
+  text-align: center;
+}
+
+.btn-mypage {
+  display: inline-block;
+  background:  #70c17b; /* マイページの緑 */
+  color: #fff;
+  padding: 12px 32px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.btn-mypage:hover {
+  background: #43a047;
+  transform: translateY(-2px);
+}
+
+.btn-folder {
+  display: inline-block;
+  background: #ff865e;
+  color: #fff;
+  padding: 12px 32px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.btn-folder:hover {
+  background: #ff704a; /* 少し濃く */
+  transform: translateY(-2px);
+}
+
+/* ===========================
+   検索ボタン hover
+   =========================== */
+
+.search-page input[type="submit"] {
+  background: #ff865e;
+  transition: background 0.2s ease;
+}
+
+.search-page input[type="submit"]:hover {
+  background: #ff704a; /* 少し濃く */
+}
+
+/* ===========================
+   検索ヒット数表示
+   =========================== */
+
+.search-count {
+  margin-top: 8px;
+  margin-bottom: 24px;
+  font-size: 14px;
+  color: #666;
+}
+
+/* ===========================
+   Google風ページネーション
+   =========================== */
+
+.google-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin: 48px 0;
+}
+
+.page-number,
+.page-nav {
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #ff865e;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.page-number:hover,
+.page-nav:hover {
+  background: #ffe1d6;
+}
+
+.page-number.active {
+  background: #ff865e;
+  color: #fff;
+  font-weight: bold;
+  cursor: default;
+}
+
+
+/* ===========================
+   スマホ対応
+   =========================== */
+
+@media (max-width: 768px) {
+  body.search-page-wrapper .mypage {
+    padding: 40px 16px;
+  }
+
+  .search-page {
+    justify-items: center;
+  }
+
+  .search-page input[type="text"] {
+    width: 100%;
+    max-width: 260px;
+    font-size: 16px;
+  }
+
+  .search-page input[type="submit"] {
+    font-size: 14px;
+  }
+
+  body.search-page-wrapper .mypage {
+    padding: 24px 16px;
+  }
+
+  .folder-grid {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    max-width: 100%;
+  }
+
+  .folder-card {
+    width: 100%;
+    max-width: 320px;
+    align-items: stretch;
+    justify-content: flex-start;
+  }
+
+  .folder-image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+  }
+
+  .actions {
+    margin-top: 48px;
+  }
+
+  .add-folder-wrapper {
+    padding: 0 16px;
+  }
+
+  .add-folder-card {
+    min-height: 60px;
+    width: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

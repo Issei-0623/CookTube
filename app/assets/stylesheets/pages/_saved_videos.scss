@@ -1,0 +1,84 @@
+.btn-saved-video {
+  display: inline-block;
+  background:  #808080;
+  color: #fff;
+  padding: 12px 32px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.btn-saved-video:hover {
+  background:  #616161; /* 少し濃く */
+  transform: translateY(-2px);
+}
+
+.btn-edit {
+  display: inline-block;
+  background:  #ffae00;
+  color: #000000;
+  padding: 6px 16px;
+  border-radius: 8px;
+  font-size: 15px;
+  height: 30px;
+  // font-weight: bold;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.btn-edit:hover {
+  background:  #de9800;
+  transform: translateY(-2px);
+}
+
+.btn-delete {
+  display: inline-block;
+  background:  #ff0000;
+  color: #fff;
+  padding: 6px 16px;
+  border-radius: 8px;
+  font-size: 15px;
+  height: 40px;
+  // font-weight: bold;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.btn-delete:hover {
+  background:  #c30000; /* 少し濃く */
+  transform: translateY(-2px);
+}
+
+.folder-checkboxes {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.folder-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 20px;
+}
+
+.video-card-actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.video-card-actions .btn {
+  min-width: 90px;
+}
+
+@media (max-width: 480px) {
+  .video-card-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
