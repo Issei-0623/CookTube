@@ -1,9 +1,10 @@
 <body class="mypage search-page-wrapper">
   <div class="search-page">
-    <h1>動画を探す</h1>
+    <h1>YouTube Shorts を探す</h1>
+    <p class="subtitle">60秒以内のショート動画に特化した検索</p>
 
     <%= form_with url: searches_path, method: :get do |f| %>
-      <%= f.text_field :keyword, placeholder: "検索ワードを入力" %>
+      <%= f.text_field :keyword, placeholder: "例：親子丼の作り方" %>
       <%= f.submit "検索" %>
     <% end %>
 
