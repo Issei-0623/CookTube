@@ -17,12 +17,14 @@
     <% if @videos.present? %>
       <div class="video-grid">
         <% @videos.each do |video| %>
-          <% title = video["desc"] || video["title"] || "タイトルなし" %>
-          <% video_id = video["id"] %>
-          <% creator = video["author"] rescue nil %>
-          <% nickname = creator&.dig("nickname") %>
-          <% username = creator&.dig("unique_id") %>
-          <% video_url = "https://www.tiktok.com/embed/v2/#{video_id}" %>
+          <% snippet = video["snippet"] %>
+          <% video_id = video.dig("id", "videoId") %>
+
+          <% title = snippet&.dig("title") || "タイトルなし" %>
+          <% nickname = snippet&.dig("channelTitle") %>
+          <% username = nil %>
+
+          <% video_url = "https://www.youtube.com/embed/#{video_id}" %>
 
           <% video_card = SavedVideo.new(
               title: title,
@@ -30,6 +32,7 @@
               nickname: nickname,
               username: username
           ) %>
+
 
           <%= render "shared/video_card", video: video_card do %>
 
