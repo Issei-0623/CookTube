@@ -126,7 +126,7 @@ body.search-page-wrapper .mypage {
   text-align: center;
 }
 
-.btn-mypage {
+.btn-mypage-search {
   display: inline-block;
   background:  #70c17b; /* マイページの緑 */
   color: #fff;
@@ -136,9 +136,14 @@ body.search-page-wrapper .mypage {
   font-weight: bold;
   text-decoration: none;
   transition: background 0.2s ease, transform 0.2s ease;
+
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1000;
 }
 
-.btn-mypage:hover {
+.btn-mypage-search:hover {
   background: #43a047;
   transform: translateY(-2px);
 }

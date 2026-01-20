@@ -76,6 +76,23 @@
   min-width: 90px;
 }
 
+.btn-mypage {
+  display: inline-block;
+  background:  #70c17b; /* マイページの緑 */
+  color: #fff;
+  padding: 12px 32px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.btn-mypage:hover {
+  background: #43a047;
+  transform: translateY(-2px);
+}
+
 @media (max-width: 480px) {
   .video-card-actions {
     flex-direction: column;

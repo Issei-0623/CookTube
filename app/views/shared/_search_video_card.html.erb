@@ -1,0 +1,22 @@
+<% snippet = video["snippet"] %>
+<% video_id = video.dig("id", "videoId") %>
+
+<div class="video-item">
+  <p class="video-title"><%= snippet["title"] %></p>
+
+  <div class="video-frame">
+    <iframe
+      src="https://www.youtube.com/embed/<%= video_id %>"
+      frameborder="0"
+      allowfullscreen>
+    </iframe>
+  </div>
+
+  <div class="video-footer">
+    <%= form_with url: saved_videos_path, method: :post, local: true do |f| %>
+      <%= f.hidden_field :title, value: snippet["title"] %>
+      <%= f.hidden_field :url, value: "https://www.youtube.com/watch?v=#{video_id}" %>
+      <%= f.submit "保存", class: "btn btn-saved-search" %>
+    <% end %>
+  </div>
+</div>

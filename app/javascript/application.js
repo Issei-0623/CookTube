@@ -1,4 +1,6 @@
 import "@hotwired/turbo-rails"
+import "infinite_scroll"
+
 
 // フォルダフォームの開閉
 document.addEventListener("turbo:load", () => {
