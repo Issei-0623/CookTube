@@ -1,34 +1,52 @@
 class SearchesController < ApplicationController
-  require 'net/http'
-  require 'uri'
-  require 'json'
-  require 'open-uri'
+  require "net/http"
+  require "uri"
+  require "json"
 
+  PER_PAGE = 12
 
   def index
     return unless params[:keyword].present?
 
-    page = (params[:page] || 1).to_i
-    per_page = 12
+    keyword = params[:keyword]
+    page    = (params[:page] || 1).to_i
 
-    url = URI("https://www.googleapis.com/youtube/v3/search")
+    # 🔴 新しい検索なら token をリセット
+    if page == 1
+      session[:youtube_next_page_token] ||= {}
+      session[:youtube_next_page_token][keyword] = nil
+    end
 
-    query = {
+    page_token = session[:youtube_next_page_token][keyword]
+
+    uri = URI("https://www.googleapis.com/youtube/v3/search")
+    uri.query = URI.encode_www_form(
       part: "snippet",
-      q: "#{params[:keyword]} #shorts",
+      q: keyword,
       type: "video",
       videoDuration: "short",
-      maxResults: per_page,
+      maxResults: PER_PAGE,
+      pageToken: page_token,
       key: ENV["YOUTUBE_API_KEY"]
-    }
+    )
 
-    url.query = URI.encode_www_form(query)
-
-    response = Net::HTTP.get(url)
-    result = JSON.parse(response)
-
+    result  = JSON.parse(Net::HTTP.get(uri))
     @videos = result["items"] || []
+
+    # 🔴 次回用 token を保存（これが最重要）
+    session[:youtube_next_page_token][keyword] = result["nextPageToken"]
+
+    respond_to do |format|
+      format.html
+      format.json do
+        html = render_to_string(
+          partial: "shared/search_video_card",
+          collection: @videos,
+          as: :video,
+          formats: [:html]
+        )
+        render json: { html: html }
+      end
+    end
   end
-
 end
-

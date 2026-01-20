@@ -1,58 +1,51 @@
 <body class="mypage search-page-wrapper">
   <div class="search-page">
     <h1>YouTube Shorts を探す</h1>
-    <p class="subtitle">60秒以内のショート動画に特化した検索</p>
+    <p class="subtitle">ショート動画に特化した検索</p>
 
-    <%= form_with url: searches_path, method: :get do |f| %>
-      <%= f.text_field :keyword, placeholder: "例：親子丼の作り方" %>
-      <%= f.submit "検索" %>
-    <% end %>
-
-    <% if params[:keyword].present? %>
-      <h2>検索ワード: <%= params[:keyword] %></h2>
-      <p class="search-count">
-        <%= (params[:page] || 1) %>ページ目を表示中（<%= @videos.size %>件）
-      </p>
+    <%= form_with url: searches_path, method: :get, local: true do %>
+      <%= text_field_tag :keyword, params[:keyword],
+        id: "keyword",
+        placeholder: "例：親子丼の作り方" %>
+      <%= submit_tag "検索" %>
     <% end %>
 
     <% if @videos.present? %>
-      <div class="video-grid">
+      <p class="search-count">
+        「<%= params[:keyword] %>」の検索結果
+      </p>
+
+      <div id="video-grid" class="video-grid">
         <% @videos.each do |video| %>
-          <% snippet = video["snippet"] %>
+          <% snippet  = video["snippet"] %>
           <% video_id = video.dig("id", "videoId") %>
 
-          <% title = snippet&.dig("title") || "タイトルなし" %>
-          <% nickname = snippet&.dig("channelTitle") %>
-          <% username = nil %>
-
-          <% video_url = "https://www.youtube.com/embed/#{video_id}" %>
-
           <% video_card = SavedVideo.new(
-              title: title,
-              url: video_url,
-              nickname: nickname,
-              username: username
+            title: snippet["title"],
+            url: "https://www.youtube.com/embed/#{video_id}",
+            nickname: snippet["channelTitle"],
+            username: nil
           ) %>
 
-
           <%= render "shared/video_card", video: video_card do %>
-
-            <% if (saved = current_user.saved_videos.find_by(url: video_url)) %>
-              <%= button_to "保存解除",
-                    saved_video_path(saved),
-                    method: :delete,
-                    data: { turbo: false },
-                    class: "btn btn-unsave-search" %>
-            <% else %>
-              <%= form_with model: SavedVideo.new,
-                    url: saved_videos_path,
-                    method: :post,
-                    data: { turbo: false } do |f| %>
-                <%= f.hidden_field :title, value: title %>
-                <%= f.hidden_field :url, value: video_url %>
-                <%= f.hidden_field :nickname, value: nickname %>
-                <%= f.hidden_field :username, value: username %>
-                <%= f.submit "保存", class: "btn btn-saved-search" %>
+            <% if user_signed_in? %>
+              <% if (saved = current_user.saved_videos.find_by(url: video_card.url)) %>
+                <%= button_to "保存解除",
+                      saved_video_path(saved),
+                      method: :delete,
+                      data: { turbo: false },
+                      class: "btn btn-unsave-search" %>
+              <% else %>
+                <%= form_with model: video_card,
+                      url: saved_videos_path,
+                      method: :post,
+                      data: { turbo: false } do |f| %>
+                  <%= f.hidden_field :title %>
+                  <%= f.hidden_field :url %>
+                  <%= f.hidden_field :nickname %>
+                  <%= f.hidden_field :username %>
+                  <%= f.submit "保存", class: "btn btn-saved-search" %>
+                <% end %>
               <% end %>
             <% end %>
           <% end %>
@@ -62,36 +55,13 @@
       <p>動画が見つかりませんでした。</p>
     <% end %>
 
-    <% if @videos.present? %>
-      <% current_page = (params[:page] || 1).to_i %>
-
-      <div class="pagination google-pagination">
-        <% if current_page > 1 %>
-          <%= link_to "＜",
-              searches_path(keyword: params[:keyword], page: current_page - 1),
-              class: "page-nav" %>
-        <% end %>
-        <% start_page = [current_page - 3, 1].max %>
-        <% end_page   = current_page + 3 %>
-
-        <% (start_page..end_page).each do |p| %>
-          <% if p == current_page %>
-            <span class="page-number active"><%= p %></span>
-          <% else %>
-            <%= link_to p,
-                searches_path(keyword: params[:keyword], page: p),
-                class: "page-number" %>
-          <% end %>
-        <% end %>
-        <%= link_to "＞",
-            searches_path(keyword: params[:keyword], page: current_page + 1),
-            class: "page-nav" %>
-      </div>
-    <% end %>
-
+    <div id="sentinel"></div>
 
     <div class="actions center">
-      <%= link_to "マイページ", mypage_path, class: "btn btn-mypage" %>
+      <%= link_to "マイページ", mypage_path, class: "btn btn-mypage-search" %>
     </div>
+
   </div>
+
 </body>
+
